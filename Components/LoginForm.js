@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import { Redirect } from 'react-router-dom';
-import { API_URL } from '../variables/const';
+import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AuthFetch } from '../redux/action-creators';
 
 function LoginForm() {
    const initialState = {
@@ -10,7 +11,9 @@ function LoginForm() {
    };
 
    const [UserInfo, SetUserInfo] = useState(initialState);
-   const [auth, setAuth] = useState(false);
+   const { isLoading, isAuthenticated } = useSelector(({ auth }) => auth);
+   const dispatch = useDispatch();
+   const loginFetch = bindActionCreators(AuthFetch, dispatch);
    const handleChangeInput = (e) => {
       SetUserInfo({
          ...UserInfo,
@@ -22,14 +25,10 @@ function LoginForm() {
       SetUserInfo(initialState);
    }
    const HandleClickLogin = () => {
-      axios.post(`${API_URL}/login`, { ...UserInfo })
-         .then(res => res.data.Token ? setAuth(true) : setAuth(false))
-         .catch(err => setAuth(false));
+      loginFetch({ ...UserInfo })
    }
    const HandleClickRegistration = () => {
-      axios.post(`${API_URL}/registration`, { ...UserInfo })
-         .then(res => console.log(res.data))
-         .catch(err => console.log(err));
+      loginFetch({ ...UserInfo })
    }
    const RegistrationForm = (
       <div className="container-fluid" >
@@ -45,13 +44,17 @@ function LoginForm() {
                   value={UserInfo.Password} onChange={handleChangeInput} required />
             </div>
             <div className="form-group">
-               <button type="submit" name="Login" className="btn btn-success" onClick={HandleClickLogin}>Login</button>
-               <button type="submit" name="Registration" className="btn btn-primary ml-3" onClick={HandleClickRegistration}>Registration</button>
+               <button type="submit" name="Login" className="btn btn-success"
+                  onClick={HandleClickLogin} value={isLoading ? "Please, wait!" : 'submit'}
+                  disabled={isLoading}>Login</button>
+               <button type="submit" name="Registration" className="btn btn-primary ml-3"
+                  onClick={HandleClickRegistration} value={isLoading ? "Please, wait!" : 'submit'}
+                  disabled={isLoading}>Registration</button>
             </div>
          </form>
       </div >
    );
-   return auth ? <Redirect to="/homepage" /> : RegistrationForm;
+   return isAuthenticated ? <Redirect to="/homepage" /> : RegistrationForm;
 }
 
 export default LoginForm;
