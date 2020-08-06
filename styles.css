@@ -18,3 +18,7 @@
    color: white;
    letter-spacing: 1.8px;
 }
+.card-body {
+   display: flex;
+   justify-content: space-between;
+}

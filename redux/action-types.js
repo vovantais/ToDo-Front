@@ -1,7 +1,11 @@
-// ! Auth
+// ! Auth login
 export const AUTH_LOGIN_FETCH = 'AUTH_LOGIN_FETCH';
 export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 export const AUTH_LOGIN_FAILURE = 'AUTH_LOGIN_FAILURE';
+// ! Auth Registration 
+export const AUTH_REGISTRATION_FETCH = 'AUTH_REGISTRATION_FETCH';
+export const AUTH_REGISTRATION_SUCCESS = 'AUTH_REGISTRATION_SUCCESS';
+export const AUTH_REGISTRATION_FAILURE = 'AUTH_REGISTRATION_FAILURE';
 // ! Add
 export const ADD_TASK = "ADD_TASK";
 // ! Delete

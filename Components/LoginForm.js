@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthFetch } from '../redux/action-creators';
+import { AuthFetch, RegistrationFetch } from '../redux/action-creators';
 
 function LoginForm() {
    const initialState = {
@@ -14,6 +14,7 @@ function LoginForm() {
    const { isLoading, isAuthenticated } = useSelector(({ auth }) => auth);
    const dispatch = useDispatch();
    const loginFetch = bindActionCreators(AuthFetch, dispatch);
+   const registrationFetch = bindActionCreators(RegistrationFetch, dispatch);
    const handleChangeInput = (e) => {
       SetUserInfo({
          ...UserInfo,
@@ -28,7 +29,7 @@ function LoginForm() {
       loginFetch({ ...UserInfo })
    }
    const HandleClickRegistration = () => {
-      loginFetch({ ...UserInfo })
+      registrationFetch({ ...UserInfo })
    }
    const RegistrationForm = (
       <div className="container-fluid" >

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { AddTaskPost, DeleteTaskPost } from '../redux/action-creators';
+import { AddTaskPost } from '../redux/action-creators';
 import PostCards from './PostCards';
+
 function Task() {
    const initialState = {
       value: '',
@@ -26,12 +27,6 @@ function Task() {
          value: '',
       });
    }
-   const handleDeleteTask = () => {
-      dispatch(DeleteTaskPost());
-      setInpVal({
-         value: '',
-      });
-   }
    return (
       <div className='container'>
          <form>
@@ -40,20 +35,19 @@ function Task() {
                <input type="text"
                   className="form-control"
                   id="InputText"
-                  style={{ width: 220 + "px" }}
+                  style={{ width: 240 + "px" }}
                   onChange={handleChangeInput}
                   value={InpVal.value}
                />
             </div>
             <div className="btn-group mt-2 ml-4" role="group" aria-label="Basic example">
-               <button type="button" className="btn btn-success" onClick={handleAddTask}>ADD</button>
-               <button type="button" className="btn btn-danger" onClick={handleDeleteTask}>DELETE</button>
-               <button type="button" className="btn btn-info" onClick={goBack}>Go back</button>
+               <button type="button" className="btn btn-success pl-5 pr-5" onClick={handleAddTask}>ADD</button>
+               <button type="button" className="btn btn-info pl-4 pr-4" onClick={goBack}>Go back</button>
             </div>
          </form>
          {
             tasks.length > 0 ?
-               tasks.map(({ value }, index) => (<PostCards {...{ value }} key={index}/>)) :
+               tasks.map(({ value }, index) => (<PostCards {...{ value, indexId: index, }} key={index} />)) :
                false
          }
       </div >
