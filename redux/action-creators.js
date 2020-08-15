@@ -71,7 +71,7 @@ export const GetTaskFetch = () => (dispatch, getStore) => {
       type: GET_TASK_FETCH,
    });
    const { auth } = getStore();
-   axios.post(`${API_URI}/tasks`, {
+   axios.get(`${API_URI}/tasks`, {
       headers: {
          'Authorization': auth && auth.Token,
       },
