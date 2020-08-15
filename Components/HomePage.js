@@ -20,7 +20,7 @@ function HomePage() {
                      <NavLink exact to='/homepage'>HOME</NavLink>
                   </li>
                   <li className="nav-item">
-                     <NavLink exact to='/task'>TASK</NavLink>
+                     <NavLink exact to='/tasks'>TASK</NavLink>
                   </li>
                </ul>
             </div>

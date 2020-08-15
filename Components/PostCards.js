@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { DeleteTaskPost } from '../redux/action-creators';
+import { DeleteTaskPostFetch } from '../redux/action-creators';
 
 function PostCards({ value, indexId }) {
+   console.log('value:', value);
+   console.log('indexId:', indexId);
    const [index, setIndex] = useState(indexId);
    const [done, setDone] = useState(false);
    const dispatch = useDispatch();
@@ -10,7 +12,8 @@ function PostCards({ value, indexId }) {
       setDone(!done);
    }
    const handleDeleteTask = () => {
-      dispatch(DeleteTaskPost(index));
+      console.log('index:', index);
+      dispatch(DeleteTaskPostFetch(index));
    }
    return (
       <div className="container-sm">
@@ -27,4 +30,4 @@ function PostCards({ value, indexId }) {
    )
 }
 
-export default PostCards
+export default PostCards;

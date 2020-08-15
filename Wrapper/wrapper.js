@@ -14,12 +14,12 @@ function Wrapper() {
          <Router>
             <Switch>
                <Route exact path='/'>
-                  <LoginForm  />
+                  <LoginForm />
                </Route>
                <Route exact path='/homepage'>
                   <HomePage />
                </Route>
-               <Route exact path='/task'>
+               <Route exact path='/tasks'>
                   <Task />
                </Route>
             </Switch>

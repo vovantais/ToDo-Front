@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { AddTaskPost } from '../redux/action-creators';
+import { PostTaskFetch } from '../redux/action-creators';
 import PostCards from './PostCards';
 
 function Task() {
@@ -9,7 +9,7 @@ function Task() {
       value: '',
    }
    const [InpVal, setInpVal] = useState(initialState);
-   const tasks = useSelector(({ addPost }) => addPost); // с редакса добовляем reducers addPost
+   const tasks = useSelector(({ tasksAction }) => tasksAction); // с редакса добовляем reducers tasksAction
    const history = useHistory();
    const dispatch = useDispatch();
 
@@ -22,7 +22,7 @@ function Task() {
       });
    }
    const handleAddTask = () => {
-      dispatch(AddTaskPost(InpVal));
+      dispatch(PostTaskFetch(InpVal));
       setInpVal({
          value: '',
       });
@@ -48,10 +48,10 @@ function Task() {
          {
             tasks.length > 0 ?
                tasks.map(({ value }, index) => (<PostCards {...{ value, indexId: index, }} key={index} />)) :
-               false
+               <h4 style={{ marginLeft: 20 + "px", marginTop: 20 + 'px', }}>There are no tasks yet...</h4>
          }
+
       </div >
    )
 }
-
 export default Task;
